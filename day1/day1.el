@@ -89,16 +89,16 @@ L150")
 			 (higher (setq click-zero (+ (/ curr-rot 100) click-zero)
 				       curr-rot (% curr-rot 100)))
 			 ;; on lower, negate the int div and add 1 full rotation to the dial if the prev wasnt zero
-			 (lower 
+			 (lower
 			  (setq click-zero (+ (/ (abs curr-rot) 100) click-zero (if was-zero '0 '1))
 				curr-rot (+ 100 (% curr-rot 100)))
 			  ;; correct an off by one err when doing the rem
 			  ;; tldr: when at a negative multiple of 100 (-100, -200, -300, ...)
 			  ;; the curr rot becomes 0 which is added to 100. this is because of how
-			  ;; the curr rot is recalcuated, taking advantage of how the rem negative produces a 
-			  ;; negative number, which inverts 100 to get the correct number. this breaks down 
+			  ;; the curr rot is recalcuated, taking advantage of how the rem negative produces a
+			  ;; negative number, which inverts 100 to get the correct number. this breaks down
 			  ;; when the rem is zero, as it doesnt invert 100 properly, so it must be set to zero.
-			  (when (eql curr-rot 100) 
+			  (when (eql curr-rot 100)
 			    (setq curr-rot 0)))))
 		 (forward-line 1)))
 	     click-zero)))
